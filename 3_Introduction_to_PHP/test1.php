@@ -6,9 +6,9 @@ $current_user = $username;
 echo $current_user . '<br>';
 
 $var = 1;
-if ($var == 1){
+if ($var == 1) {
     echo 'true' . '<br>';
-} else{
+} else {
     echo 'false';
 }
 
