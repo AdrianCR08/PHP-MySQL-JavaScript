@@ -3,7 +3,15 @@ $username = "Fred Smith";
 echo $username;
 echo "<br>";
 $current_user = $username;
-echo $current_user;
+echo $current_user . '<br>';
+
+$var = 1;
+if ($var == 1){
+    echo 'true' . '<br>';
+} else{
+    echo 'false';
+}
+
 
 /*
 -> Variable names, after the dollar sign, must start with a letter of the alphabet or the _ (underscore) character
