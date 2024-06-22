@@ -1,9 +1,9 @@
 <?php
 $gn = getnext();
 
-if ($fiinshed == 1 OR $gn == 1) exit;
+if ($finshed == 1 or $gn == 1) exit;
 
-function getnext() {
+function getnext()
+{
     return 1;
-}   
-
+}
