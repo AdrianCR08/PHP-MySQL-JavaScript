@@ -6,7 +6,7 @@ class User {
     }
 }
 
-$object = new User();
+$object = new User;
 $object -> password = "secret";
 
 echo $object -> get_password();

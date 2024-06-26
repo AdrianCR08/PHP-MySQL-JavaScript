@@ -1,5 +1,5 @@
 <?php
-$object1 = new User();
+$object1 = new User(" ", " ");
 $object1 -> name = "Allice";
 $object2 = $object1;
 $object2 -> name = "Amy";

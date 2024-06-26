@@ -1,5 +1,5 @@
 <?php
-$object = new User();
+$object = new User(" ", " ");
 print_r($object);
 echo "\n";
 
