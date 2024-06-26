@@ -1,0 +1,20 @@
+# Ensure mod_rewrite is enabled
+RewriteEngine On
+
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Implement Content Security Policy (CSP)
+Header set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.biencel.mx; style-src 'self' https://fonts.googleapis.com; img-src 'self' https://cdn.biencel.mx;"
+
+# Implement HTTP Strict Transport Security (HSTS)
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Handle requests
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ /index.html [L]
+</IfModule>
