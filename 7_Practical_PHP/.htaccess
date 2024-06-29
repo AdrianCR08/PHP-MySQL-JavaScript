@@ -1,0 +1,56 @@
+
+# BEGIN WordPress
+# Las directivas (líneas) entre «BEGIN WordPress» y «END WordPress» son
+# generadas dinámicamente y solo deberían ser modificadas mediante filtros de WordPress.
+# Cualquier cambio en las directivas que hay entre esos marcadores serán sobrescritas.
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresByType image/jpg "access plus 24 hours"
+	ExpiresByType image/jpeg "access plus 24 hours"
+	ExpiresByType image/gif "access plus 24 hours"
+	ExpiresByType image/png "access plus 24 hours"
+	ExpiresByType text/css "access plus 24 hours"
+	ExpiresByType application/pdf "access plus 1 week"
+	ExpiresByType text/javascript "access plus 24 hours"
+	ExpiresByType text/html "access plus 2 hours"
+	ExpiresByType image/x-icon "access plus 1 year"
+	ExpiresDefault "access plus 24 hours"
+</IfModule>
+Options -Indexes
+<IfModule mod_headers.c>
+	Header set X-Endurance-Cache-Level "2"
+	Header set X-nginx-cache "WordPress"
+	#Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+    #Header always set X-Frame-Options "deny"
+    #Header setifempty Referrer-Policy: same-origin
+    #Header set X-XSS-Protection "1; mode=block"
+    #Header set X-Permitted-Cross-Domain-Policies "none"
+    #Header set Referrer-Policy "no-referrer"
+    #Header set X-Content-Type-Options: nosniff
+    # Header set Content-Security-Policy "default-src 'self';"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.elementor.com https://ajax.googleapis.com https://cdnjs.cloudflare.com https://code.jquery.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.elementor.com; img-src 'self' https://cdn.elementor.com data: https://maps.gstatic.com *.googleapis.com *.ggpht.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' https://www.google.com/maps;"
+	Header set Content-Security-Policy "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'"
+
+</IfModule>
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteRule ^/wp-content/endurance-page-cache/ - [L]
+	RewriteCond %{REQUEST_METHOD} !POST
+	RewriteCond %{QUERY_STRING} !.*=.*
+	RewriteCond %{HTTP_COOKIE} !(wordpress_test_cookie|comment_author|wp\-postpass|wordpress_logged_in|wptouch_switch_toggle|wp_woocommerce_session_) [NC]
+	RewriteCond %{DOCUMENT_ROOT}/wp-content/endurance-page-cache/$1/_index.html -f
+	RewriteRule ^(.*)$ /wp-content/endurance-page-cache/$1/_index.html [L]
+</IfModule>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+
+# END WordPress
