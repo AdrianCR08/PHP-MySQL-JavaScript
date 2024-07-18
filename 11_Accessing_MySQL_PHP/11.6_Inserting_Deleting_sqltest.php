@@ -1,7 +1,7 @@
 <?php // sqltest.php 
 require_once '11.1_Logging.php';
 try {
-$pdo = new PDO($attr, $user, $pass, $opts);
+    $pdo = new PDO($attr, $user, $pass, $opts);
 } catch (PDOException $e) {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
@@ -9,22 +9,22 @@ if (isset($_POST['delete']) && isset($_POST['isbn'])) {
     $isbn = get_post($pdo, 'isbn');
     $query = "DELETE FROM classics WHERE isbn=$isbn";
     $result = $pdo->query($query);
-    }
-    if (isset($_POST['author']) &&
+}
+if (isset($_POST['author']) &&
     isset($_POST['title']) &&
-    isset($_POST['category']) && 
+    isset($_POST['category']) &&
     isset($_POST['year']) &&
     isset($_POST['isbn'])) {
-    $author = get_post($pdo, 'author'); 
+    $author = get_post($pdo, 'author');
     $title = get_post($pdo, 'title');
     $category = get_post($pdo, 'category');
     $year = get_post($pdo, 'year');
     $isbn = get_post($pdo, 'isbn');
     $query = "INSERT INTO classics VALUES" .
-    "($author, $title, $category, $year, $isbn)";
+        "($author, $title, $category, $year, $isbn)";
     $result = $pdo->query($query);
-    }
-    echo <<<_END
+}
+echo <<<_END
     <form action="11.6_Inserting_Deleting_sqltest.php" method="post"><pre>
     Author <input type = "text" name = "author">
     Title <input type = "text" name = "title">
@@ -35,17 +35,17 @@ if (isset($_POST['delete']) && isset($_POST['isbn'])) {
     </pre></form>
     _END;
 
-    $query = "SELECT * FROM classics";
-    $result = $pdo -> query($query);
+$query = "SELECT * FROM classics";
+$result = $pdo->query($query);
 
-    while($row = $result -> fetch()){
-        $r0 = htmlspecialchars($row['author']);
-        $r1 = htmlspecialchars($row['title']);
-        $r2 = htmlspecialchars($row['category']);
-        $r3 = htmlspecialchars($row['year']);
-        $r4 = htmlspecialchars($row['isbn']);
+while ($row = $result->fetch()) {
+    $r0 = htmlspecialchars($row['author']);
+    $r1 = htmlspecialchars($row['title']);
+    $r2 = htmlspecialchars($row['category']);
+    $r3 = htmlspecialchars($row['year']);
+    $r4 = htmlspecialchars($row['isbn']);
 
-        echo <<<_END
+    echo <<<_END
         <pre>
         Author: $r0
         Title: $r1
@@ -58,8 +58,10 @@ if (isset($_POST['delete']) && isset($_POST['isbn'])) {
         <input type = 'hidden' name = "isbn" value = '$r4'>
         <input type = 'submit' value = 'Delete Record'></form>
         _END;
-    }
-    function get_post($pdo, $var){
-        return $pdo->quote($_POST[$var]);
-    }
-    ?>
+}
+function get_post($pdo, $var)
+{
+    return $pdo->quote($_POST[$var]);
+}
+
+?>

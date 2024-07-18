@@ -1,0 +1,4 @@
+gn = getnext();
+
+if(finished == 1 || gn == 1)
+    done = 1;
