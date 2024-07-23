@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$data = 'socialnet';
+$data = 'robinsnest';
 $user = 'root';
 $pass = 'admin';
 $chrs = 'utf8mb4';
@@ -29,7 +29,7 @@ function destroySession(){
     session_destroy();
 }
 
-function sanitizeSrtring($var){
+function sanitizeString($var){
     global $pdo;
     $var = strip_tags($var);
     $var = htmlentities($var);
@@ -51,6 +51,3 @@ function showProfile($user){
     }
     echo "<p> Nothing to see here, yet</p><br>";
 }
-
-
-
